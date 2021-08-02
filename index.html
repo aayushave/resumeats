@@ -32,8 +32,10 @@
 				</a>
 				<div class="navbar" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
-						<li ><a class="nav-link bg-light" href="index.html">Home</a></li>
-						<li ><a class="nav-link bg-light" href="privacy.html">Privacy Policy</a></li>
+						<li ><a class="nav-link bg-light" href="index.html">User Login</a></li>
+						<li ><a class="nav-link bg-light" href="admin.html">Admin Login</a></li>
+                                                <li ><a class="nav-link bg-light" href="privacy.html">Privacy Policy</a></li>
+                                                
 					</ul>
 					
 				</div>
@@ -55,8 +57,8 @@
 	  <!--Tab-content-->
       <div class="tab-content">
         <div id="login">   
-			<h1 style="color:white;padding-bottom:10px">Welcome Back!</h1>
-			<form action="login.jsp" method="post">
+			<h1 style="color:white;padding-bottom:10px">Welcome User!</h1>
+			<form action="login" method="post">
 				<div class="field-wrap">
 					<input type="email" required autocomplete="off" placeholder="Email Address" name="email"/>
 				</div>
@@ -68,7 +70,7 @@
 		</div>
 		<div id="signup">   
 			<h1 style="color:white;padding-bottom:10px">Sign Up for Free</h1>
-			<form action="signup.jsp" method="post">
+			<form action="signup" method="post">
           
 				<div class="field-wrap">
 					<input type="text" required autocomplete="off" placeholder="First Name" name="first_name"/>
@@ -94,7 +96,7 @@
 		</div>
         <div id="forgot">   
 			<h1 style="color:white;padding-bottom:10px">Forgot Password</h1>
-			<form action="reset.jsp" method="post">
+			<form action="reset" method="post">
 				<div class="field-wrap">
 					  <input type="text" required autocomplete="off" placeholder="First Name" name="first_name"/>
 				</div>

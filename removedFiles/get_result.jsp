@@ -11,6 +11,7 @@ pageEncoding="ISO-8859-1"%>
 <%
     String userid = request.getParameter("userid");
     String applied_job=request.getParameter("applied_job");
+    String companyy=request.getParameter("companyy");
     String first_name;
     String last_name;
     
@@ -53,7 +54,7 @@ pageEncoding="ISO-8859-1"%>
 try
 {
 Class.forName("com.mysql.jdbc.Driver");
-String sql="select * from dbresume where userid="+userid+" AND apply_job='"+applied_job+"' AND engineering_cgpa>="+cgpa_criteria+" AND (diploma_done='"+diploma_accepted+"' OR diploma_done='NO') AND (diploma_percentage>="+diploma_criteria+" OR diploma_percentage=0)  AND proficiency_count>="+proficiency_criteria+" AND (prior_experience='"+experience_criteria+"' OR prior_experience='YES') ";
+String sql="select * from dbresume where userid="+userid+" AND company_applied='"+companyy+"' AND apply_job='"+applied_job+"' AND engineering_cgpa>="+cgpa_criteria+" AND (diploma_done='"+diploma_accepted+"' OR diploma_done='NO') AND (diploma_percentage>="+diploma_criteria+" OR diploma_percentage=0)  AND proficiency_count>="+proficiency_criteria+" AND (prior_experience='"+experience_criteria+"' OR prior_experience='YES') ";
        Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/students","root","");
             PreparedStatement ps=con.prepareStatement(sql);
@@ -64,10 +65,10 @@ String sql="select * from dbresume where userid="+userid+" AND apply_job='"+appl
                 first_name=rs.getString("first_name");
                 last_name=rs.getString("last_name");
                 
-                String dserialid,duserid,dcompany_applied,dfirst_name,dlast_name,demail,ddob,dphonenumber,dengineering_stream,dengineering_cgpa,ddiploma_done,ddiploma_percentage;
+                String duserid,dcompany_applied,dfirst_name,dlast_name,demail,ddob,dphonenumber,dengineering_stream,dengineering_cgpa,ddiploma_done,ddiploma_percentage;
                 String dproficiencty_count,dlist_proficiency,dprior_experience,dlist_experience,dapply_job;   
                 
-                dserialid=rs.getString("serialid");
+                
                 duserid=rs.getString("userid");
                 dcompany_applied=rs.getString("company_applied");
                 dfirst_name=rs.getString("first_name");
@@ -85,17 +86,22 @@ String sql="select * from dbresume where userid="+userid+" AND apply_job='"+appl
                 dlist_experience=rs.getString("list_experience");     
                 dapply_job=rs.getString("apply_job");     
                 Statement st=con.createStatement();
-                int i=st.executeUpdate("insert into dbshortlist(`serialid`, `userid`, `company_applied`, `first_name`, `last_name`, `email`, `dob`, `phonenumber`, `engineering_stream`, `engineering_cgpa`, `diploma_done`, `diploma_percentage`, `proficiency_count`, `list_proficiency`, `prior_experience`, `list_experience`, `apply_job`) values('"+dserialid+"','"+duserid+"','"+dcompany_applied+"','"+dfirst_name+"','"+dlast_name+"','"+demail+"','"+ddob+"','"+dphonenumber+"','"+dengineering_stream+"','"+dengineering_cgpa+"','"+ddiploma_done+"','"+ddiploma_percentage+"','"+dproficiencty_count+"','"+dlist_proficiency+"','"+dprior_experience+"','"+dlist_experience+"','"+dapply_job+"')");
+                int i=st.executeUpdate("insert into dbshortlist( `userid`, `company_applied`, `first_name`, `last_name`, `email`, `dob`, `phonenumber`, `engineering_stream`, `engineering_cgpa`, `diploma_done`, `diploma_percentage`, `proficiency_count`, `list_proficiency`, `prior_experience`, `list_experience`, `apply_job`) values('"+duserid+"','"+dcompany_applied+"','"+dfirst_name+"','"+dlast_name+"','"+demail+"','"+ddob+"','"+dphonenumber+"','"+dengineering_stream+"','"+dengineering_cgpa+"','"+ddiploma_done+"','"+ddiploma_percentage+"','"+dproficiencty_count+"','"+dlist_proficiency+"','"+dprior_experience+"','"+dlist_experience+"','"+dapply_job+"')");
                 if (i==1){
                     out.println("<script type=\"text/javascript\">");
-                    out.println("alert('Dear "+first_name+" "+last_name+", You have been selected for the next round. Your Applied Job is "+applied_job+"' );");
+                    session.setAttribute("nn", first_name);
+                    session.setAttribute("ll", last_name);
+                    session.setAttribute("aa",applied_job);
+                    session.setAttribute("cc",companyy);
+                    session.setAttribute("ee",demail);
+                    out.println("location='result.jsp';");
+                    out.println("</script>");
                 }
-                out.println("location='index.jsp';");
-                out.println("</script>");
+                
 
             }else{
                 out.println("<script type=\"text/javascript\">");
-                out.println("alert('Sorry you are not eligible for the position of "+applied_job+". You do not fit criteria that has been set by employer. Better next time' );");
+                out.println("alert('Sorry you are not eligible for the position of "+applied_job+" | "+companyy+". You do not fit criteria that has been set by employer. Better next time' );");
                 out.println("location='index.jsp';");
                 out.println("</script>");
             }

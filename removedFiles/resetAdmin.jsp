@@ -51,11 +51,10 @@
     // Authorized the Session object.
     Session mailSession = Session.getDefaultInstance(props);
 
-        // Create a message with the specified information. 
         MimeMessage msg = new MimeMessage(mailSession);
-        msg.setFrom(new InternetAddress("resumeselection3@gmail.com","Resume ATS"));
+        msg.setFrom(new InternetAddress("hosteventz@gmail.com","Resume ATS"));
         msg.setRecipients(Message.RecipientType.TO,email);
-        msg.setRecipients(Message.RecipientType.BCC, "resumeselection3@gmail.com");
+        msg.setRecipients(Message.RecipientType.BCC, "hosteventz@gmail.com");
         msg.setSubject(subject);
         msg.setContent(messg,"text/html");
         
@@ -66,13 +65,13 @@
         try{
             System.out.println("Sending.");
             // Connect to Amazon SES using the SMTP username and password you specified above.
-            transport.connect("smtp.gmail.com", "resumeselection3@gmail.com", "parse@123");
+            transport.connect("smtp.gmail.com", "hosteventz@gmail.com", "Redonion363");
             // Send the email.
             transport.sendMessage(msg, msg.getAllRecipients());
             System.out.println("Mail Sent.");
             out.println("<script type=\"text/javascript\">");
             out.println("alert('If you have registered, You will receive mail soon');");
-            out.println("location='index.html';");
+            out.println("location='admin.html';");
             out.println("</script>");
         }
         catch (Exception ex) {
@@ -80,7 +79,7 @@
             System.out.println("The email was not sent.");
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Email Not Sent  Please Try Again To Continue');");
-            out.println("location='index.html';");
+            out.println("location='admin.html';");
             out.println("</script>");
             System.out.println("Error message: " + ex.getMessage());
         }

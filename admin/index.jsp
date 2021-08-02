@@ -39,7 +39,7 @@
                                     <ul class="navbar-nav ml-auto">
 						<li ><a class="nav-link bg-light" href="index.jsp">Home</a></li>
 						<li ><a class="nav-link bg-light" href="privacy.jsp">Privacy Policy</a></li>
-                                                <li ><a class="nav-link bg-danger text-white" href="logout.jsp">Logout</a></li>
+                                                <li ><a class="nav-link bg-danger text-white" href="../logout">Logout</a></li>
 					</ul>
 					
 				</div>
@@ -50,7 +50,7 @@
                                 response.setHeader("Pragma","no-cache");
                                 response.setDateHeader ("Expires", 0);
                                 
-                                session = request.getSession(false);
+                                session = request.getSession(true);
                                 String userid = (String)session.getAttribute("userid");
                                 String first_name = (String)session.getAttribute("first_name");
                                 String last_name = (String)session.getAttribute("last_name");
@@ -60,7 +60,7 @@
                                 String company=(String)session.getAttribute("company");
                                 String id= session.getId();
 				if (first_name == null){ 
-                                    response.sendRedirect("logout.jsp");}
+                                    response.sendRedirect("../logout");}
 				else{ 
                                     //IF THE VALUE IN SESSION IS NOT NULL THEN THE IS USER IS VALID
                                     out.print(" <h6 style=\"color:#ffffff\"> Welcome " +company+" | " +first_name+" </h6>");
